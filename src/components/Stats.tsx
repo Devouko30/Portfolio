@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Award, Clock, Users, Code, FileText, Certificate } from 'lucide-react';
+import { Award, Clock, Users, Code, FileText, GraduationCap } from 'lucide-react';
 
 const statItems = [
   { value: '10+', label: 'CLIENTS', icon: Users },
@@ -8,7 +8,7 @@ const statItems = [
   { value: '30+', label: 'PROJECTS', icon: Code },
   { value: '12+', label: 'PUBLICATIONS', icon: FileText },
   { value: '4+', label: 'AWARDS', icon: Award },
-  { value: '8+', label: 'CERTIFICATIONS', icon: Certificate },
+  { value: '8+', label: 'CERTIFICATIONS', icon: GraduationCap },
 ];
 
 const Stats = () => {
