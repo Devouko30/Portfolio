@@ -16,7 +16,7 @@ const CVDownload = () => {
         }}
         whileTap={{ scale: 0.95 }}
       >
-        <span>DOWNLOAD CV</span>
+        <span className="uppercase">Download CV</span>
         <motion.div
           className="relative"
           initial={{ y: 0 }}
