@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -13,6 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Handle scroll events for navbar appearance
   useEffect(() => {
@@ -39,6 +41,7 @@ const Navbar = () => {
   // Smooth scroll function
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
       window.scrollTo({
@@ -52,7 +55,7 @@ const Navbar = () => {
     <motion.header 
       className={cn(
         'fixed w-full z-50 transition-all duration-300',
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-6'
+        scrolled ? 'bg-black/90 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-6'
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -69,6 +72,7 @@ const Navbar = () => {
           </a>
         </motion.div>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex space-x-8">
             {navLinks.map((link, i) => (
@@ -82,7 +86,7 @@ const Navbar = () => {
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
                   className={cn(
-                    'text-gray-800 hover:text-portfolio-purple transition-colors relative px-1 py-2',
+                    'text-gray-200 hover:text-portfolio-purple transition-colors relative px-1 py-2',
                     activeSection === link.href.substring(1) ? 'text-portfolio-purple font-medium' : ''
                   )}
                 >
@@ -102,13 +106,53 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <button className="text-gray-800 focus:outline-none">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button 
+            className="text-gray-200 focus:outline-none"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <motion.div 
+          className="md:hidden bg-black/95 backdrop-blur-md"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="container mx-auto px-4 py-4">
+            <ul className="flex flex-col space-y-4">
+              {navLinks.map((link, i) => (
+                <motion.li 
+                  key={link.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * i }}
+                >
+                  <a 
+                    href={link.href}
+                    onClick={(e) => scrollToSection(e, link.href)}
+                    className={cn(
+                      'text-gray-200 hover:text-portfolio-purple transition-colors block py-2',
+                      activeSection === link.href.substring(1) ? 'text-portfolio-purple font-medium' : ''
+                    )}
+                  >
+                    {link.name}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      )}
     </motion.header>
   );
 };

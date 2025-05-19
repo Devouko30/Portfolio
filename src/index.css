@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -96,6 +97,74 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black text-white;
+    background-color: #000000;
+    background-image: url('/lovable-uploads/b82513c8-f28b-4ab9-b0eb-f3c4dce87ba8.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
+
+  section {
+    @apply py-20;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  .section-title {
+    @apply text-center mb-12;
+  }
+
+  .section-title h2 {
+    @apply mb-2;
+  }
+
+  .section-title .accent {
+    @apply text-portfolio-purple;
+  }
+
+  .container {
+    @apply mx-auto px-4 max-w-6xl;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes pulse-purple {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
+  }
+}
+
+.pulse-purple {
+  animation: pulse-purple 2s infinite;
 }
