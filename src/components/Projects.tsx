@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, FileText, Video } from 'lucide-react';
@@ -50,12 +49,12 @@ const projectsData: Project[] = [
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
   return (
     <motion.div 
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      className="bg-black/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-portfolio-purple transition-all duration-300"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(139, 92, 246, 0.2)" }}
     >
       <div className="h-56 overflow-hidden">
         <img 
@@ -66,14 +65,14 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-        <p className="text-gray-600 mb-4">{project.description}</p>
+        <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
+        <p className="text-gray-400 mb-4">{project.description}</p>
         
         <div className="flex flex-wrap gap-2 mb-5">
           {project.tags.map(tag => (
             <span 
               key={tag} 
-              className="px-3 py-1 bg-portfolio-light-purple/30 text-portfolio-deep-purple rounded-full text-xs font-medium"
+              className="px-3 py-1 bg-portfolio-purple/20 text-portfolio-purple rounded-full text-xs font-medium"
             >
               {tag}
             </span>
@@ -100,8 +99,8 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.02)" }}
+              className="px-4 py-2 border border-portfolio-purple text-portfolio-purple rounded-lg text-sm font-medium inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Github size={16} />
@@ -114,8 +113,8 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
               href={project.caseStudyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.02)" }}
+              className="px-4 py-2 border border-green-500 text-green-500 rounded-lg text-sm font-medium inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <FileText size={16} />
@@ -128,8 +127,8 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
               href={project.videoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(0,0,0,0.02)" }}
+              className="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg text-sm font-medium inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Video size={16} />
@@ -143,11 +142,8 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
 };
 
 const Projects = () => {
-  const [category, setCategory] = useState('all');
-  const categories = ['all', 'web', 'mobile', 'design'];
-  
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 bg-black text-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0 }}
@@ -156,10 +152,10 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Portfolio</h2>
           <div className="h-1 w-20 bg-portfolio-purple mx-auto mb-8"></div>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Explore my recent projects showcasing my skills in web development, design, and problem-solving.
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Here is a small sample of my projects.
           </p>
         </motion.div>
         

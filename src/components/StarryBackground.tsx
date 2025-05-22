@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 
 const StarryBackground = () => {
@@ -22,23 +21,25 @@ const StarryBackground = () => {
 
     // Create stars
     const stars: { x: number; y: number; radius: number; vx: number; vy: number; alpha: number }[] = [];
-    const STAR_COUNT = 200;
+    const STAR_COUNT = 100; // Reduced from 200 to improve performance
 
     for (let i = 0; i < STAR_COUNT; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 1.5,
-        vx: Math.random() * 0.1 - 0.05,
-        vy: Math.random() * 0.1 - 0.05,
+        vx: Math.random() * 0.05 - 0.025, // Reduced velocity
+        vy: Math.random() * 0.05 - 0.025, // Reduced velocity
         alpha: Math.random()
       });
     }
 
+    let animationFrameId: number;
+
     // Animation
     const animate = () => {
-      // Clear canvas
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      // Clear canvas with less opacity for better performance
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'; // Increased opacity to reduce redraw overhead
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw stars
@@ -48,10 +49,12 @@ const StarryBackground = () => {
         ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
         ctx.fill();
 
-        // Twinkle effect
-        star.alpha += Math.random() * 0.02 - 0.01;
-        if (star.alpha < 0.1) star.alpha = 0.1;
-        if (star.alpha > 1) star.alpha = 1;
+        // Twinkle effect - reduced frequency
+        if (Math.random() > 0.95) { // Only update some stars each frame
+          star.alpha += Math.random() * 0.02 - 0.01;
+          if (star.alpha < 0.1) star.alpha = 0.1;
+          if (star.alpha > 1) star.alpha = 1;
+        }
 
         // Move stars
         star.x += star.vx;
@@ -62,13 +65,14 @@ const StarryBackground = () => {
         if (star.y < 0 || star.y > canvas.height) star.y = Math.random() * canvas.height;
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
       window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId); // Properly cancel animation frame on cleanup
     };
   }, []);
 

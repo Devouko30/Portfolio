@@ -1,129 +1,154 @@
-
 import { motion } from 'framer-motion';
+import { ArrowDown, Twitter, Facebook, Linkedin, Github, Download, ArrowRight } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+
+// Move this OUTSIDE the component!
+const heroLines = [
+  'HELLO , WORLD',
+  'I am Dev Ouko.',
+  'FULL STACK WEB DEVELOPER | MOBILE DEVELOPER',
+];
+
+// Optimized typewriter hook with better cleanup
+function useSequentialTypewriter(lines: string[], speed = 60, delay = 500) {
+  const [displayed, setDisplayed] = useState<string[]>(Array(lines.length).fill(''));
+  const timeoutsRef = useRef<number[]>([]);
+  const activeRef = useRef(true);
+
+  useEffect(() => {
+    let line = 0;
+    let char = 0;
+    
+    // Reset state on mount
+    setDisplayed(Array(lines.length).fill(''));
+    activeRef.current = true;
+    
+    // Clear any existing timeouts
+    timeoutsRef.current.forEach(window.clearTimeout);
+    timeoutsRef.current = [];
+
+    function typeNext() {
+      if (!activeRef.current) return;
+      if (line >= lines.length) return;
+      
+      try {
+        setDisplayed(prev => {
+          const updated = [...prev];
+          if (line < lines.length && char <= lines[line].length) {
+            updated[line] = lines[line].slice(0, char + 1);
+          }
+          return updated;
+        });
+        
+        char++;
+        
+        if (char <= lines[line].length) {
+          const timeout = window.setTimeout(typeNext, speed);
+          timeoutsRef.current.push(timeout);
+        } else {
+          line++;
+          char = 0;
+          
+          if (line < lines.length) {
+            const timeout = window.setTimeout(typeNext, delay);
+            timeoutsRef.current.push(timeout);
+          }
+        }
+      } catch (err) {
+        console.error('Typewriter error:', err);
+      }
+    }
+    
+    // Start with a small delay
+    const initialTimeout = window.setTimeout(typeNext, 100);
+    timeoutsRef.current.push(initialTimeout);
+    
+    // Cleanup function
+    return () => {
+      activeRef.current = false;
+      timeoutsRef.current.forEach(window.clearTimeout);
+      timeoutsRef.current = [];
+    };
+  }, [lines, speed, delay]); // Depend on the actual lines array for safety
+  
+  return displayed;
+}
 
 const Hero = () => {
+  // Slower typing speed and longer delay between lines
+  const [h2, h1, h3] = useSequentialTypewriter(heroLines, 70, 400);
+
   return (
-    <section id="home" className="min-h-screen flex items-center relative overflow-hidden pt-20">
-      {/* Background animated elements */}
-      <div className="absolute inset-0 -z-10">
-        <motion.div 
-          className="w-64 h-64 rounded-full bg-portfolio-light-purple/20 absolute top-1/4 left-1/4"
-          animate={{ 
-            x: [0, 10, -10, 0],
-            y: [0, -15, 5, 0],
-            scale: [1, 1.05, 0.95, 1]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div 
-          className="w-40 h-40 rounded-full bg-portfolio-purple/10 absolute bottom-1/4 right-1/3"
-          animate={{ 
-            x: [0, -20, 20, 0],
-            y: [0, 10, -10, 0],
-            scale: [1, 0.9, 1.1, 1]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
+    <section id="home" className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 bg-gradient-to-b from-black to-gray-900">
+      {/* Background gradient fallback */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 via-portfolio-dark to-portfolio-secondary"></div>
+      
+      <div className="container mx-auto px-4 flex-1 flex flex-col justify-center relative z-10">
+        <div className="max-w-3xl mx-auto text-center flex flex-col justify-center items-center min-h-[60vh]">
+          <motion.h2
+            className="text-portfolio-purple font-bold uppercase tracking-widest mb-4 text-lg md:text-xl drop-shadow-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            style={{ minHeight: '2.5rem' }}
+          >
+            {h2}
+          </motion.h2>
+          
+          <motion.h1
+            className="text-white dark:text-white text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            style={{ minHeight: '5rem' }}
+          >
+            {h1}
+          </motion.h1>
+          
+          <motion.h3
+            className="text-white dark:text-white text-lg md:text-2xl font-medium mb-10 uppercase tracking-wide drop-shadow-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            style={{ minHeight: '2.5rem' }}
+          >
+            {h3}
+          </motion.h3>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <motion.a
+              href="#about"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white text-white rounded-lg font-medium text-lg hover:bg-white hover:text-black transition-colors shadow-md"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span>More About Me</span>
+              <ArrowDown className="w-5 h-5" />
+            </motion.a>
+          </div>
+        </div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <motion.h2 
-              className="text-gray-600 mb-3 text-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Hello, I'm
-            </motion.h2>
-            
-            <motion.h1 
-              className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-portfolio-purple to-portfolio-deep-purple text-transparent bg-clip-text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Your Name
-            </motion.h1>
-            
-            <motion.h3 
-              className="text-2xl md:text-3xl font-medium text-gray-700 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              Web Developer & Designer
-            </motion.h3>
-            
-            <motion.p 
-              className="text-gray-600 mb-8 max-w-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              I create beautiful, responsive websites with modern technologies.
-              Passionate about delivering exceptional user experiences through clean code.
-            </motion.p>
-            
-            <motion.div 
-              className="flex space-x-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <motion.a 
-                href="#projects"
-                className="px-6 py-3 bg-portfolio-purple text-white rounded-lg font-medium shadow-lg shadow-portfolio-purple/20"
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: "0 10px 25px -5px rgba(139, 92, 246, 0.4)"
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Projects
-              </motion.a>
-              
-              <motion.a 
-                href="#contact"
-                className="px-6 py-3 border-2 border-portfolio-purple text-portfolio-purple rounded-lg font-medium"
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: "rgba(139, 92, 246, 0.05)"
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Me
-              </motion.a>
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            className="md:w-1/2 flex justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {/* Replace with your own profile image */}
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-portfolio-purple to-portfolio-deep-purple p-1">
-              <div className="w-full h-full rounded-full bg-white overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800&h=800" 
-                  alt="Profile" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </motion.div>
-        </div>
+      {/* Social Icons */}
+      <div className="w-full flex justify-center gap-6 absolute bottom-10 left-0 z-20">
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-portfolio-purple transition-colors">
+          <Twitter size={28} />
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-portfolio-purple transition-colors">
+          <Facebook size={28} />
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-portfolio-purple transition-colors">
+          <Linkedin size={28} />
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-portfolio-purple transition-colors">
+          <Github size={28} />
+        </a>
+      </div>
+      
+      {/* Static background elements instead of animated ones */}
+      <div className="absolute inset-0 -z-10">
+        <div className="w-96 h-96 rounded-full bg-portfolio-purple/10 absolute top-1/4 left-1/4 blur-3xl" />
+        <div className="w-96 h-96 rounded-full bg-blue-500/10 absolute bottom-1/4 right-1/4 blur-3xl" />
       </div>
     </section>
   );

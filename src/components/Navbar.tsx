@@ -1,17 +1,23 @@
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Services', href: '#services' },
   { name: 'Contact', href: '#contact' },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  currentTheme?: 'light' | 'dark';
+  toggleTheme?: () => void;
+}
+
+const Navbar = ({ currentTheme, toggleTheme }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,8 +60,10 @@ const Navbar = () => {
   return (
     <motion.header 
       className={cn(
-        'fixed w-full z-50 transition-all duration-300',
-        scrolled ? 'bg-black/90 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-6'
+        'fixed w-full z-50 transition-all duration-300 dark:text-white text-gray-900',
+        scrolled 
+          ? 'bg-white/90 dark:bg-black/90 backdrop-blur-md shadow-md py-4' 
+          : 'bg-transparent py-6'
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -73,41 +81,51 @@ const Navbar = () => {
         </motion.div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            {navLinks.map((link, i) => (
-              <motion.li 
-                key={link.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * i }}
-              >
-                <a 
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className={cn(
-                    'text-gray-200 hover:text-portfolio-purple transition-colors relative px-1 py-2',
-                    activeSection === link.href.substring(1) ? 'text-portfolio-purple font-medium' : ''
-                  )}
+        <div className="hidden md:flex items-center space-x-8">
+          <nav>
+            <ul className="flex space-x-8">
+              {navLinks.map((link, i) => (
+                <motion.li 
+                  key={link.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i }}
                 >
-                  {link.name}
-                  {activeSection === link.href.substring(1) && (
-                    <motion.div 
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-portfolio-purple"
-                      layoutId="activeSection"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
+                  <a 
+                    href={link.href}
+                    onClick={(e) => scrollToSection(e, link.href)}
+                    className={cn(
+                      'dark:text-gray-200 text-gray-700 hover:text-portfolio-purple transition-colors relative px-1 py-2',
+                      activeSection === link.href.substring(1) ? 'text-portfolio-purple font-medium' : ''
+                    )}
+                  >
+                    {link.name}
+                    {activeSection === link.href.substring(1) && (
+                      <motion.div 
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-portfolio-purple"
+                        layoutId="activeSection"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </nav>
+          
+          {/* Theme Toggle */}
+          {currentTheme && toggleTheme && (
+            <ThemeToggle currentTheme={currentTheme} toggleTheme={toggleTheme} />
+          )}
+        </div>
 
-        {/* Mobile menu button */}
-        <div className="md:hidden">
+        {/* Mobile menu and theme toggle */}
+        <div className="md:hidden flex items-center space-x-4">
+          {currentTheme && toggleTheme && (
+            <ThemeToggle currentTheme={currentTheme} toggleTheme={toggleTheme} />
+          )}
           <button 
-            className="text-gray-200 focus:outline-none"
+            className="dark:text-gray-200 text-gray-700 focus:outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -122,7 +140,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <motion.div 
-          className="md:hidden bg-black/95 backdrop-blur-md"
+          className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
@@ -141,7 +159,7 @@ const Navbar = () => {
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
                     className={cn(
-                      'text-gray-200 hover:text-portfolio-purple transition-colors block py-2',
+                      'dark:text-gray-200 text-gray-700 hover:text-portfolio-purple transition-colors block py-2',
                       activeSection === link.href.substring(1) ? 'text-portfolio-purple font-medium' : ''
                     )}
                   >

@@ -73,7 +73,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-gray-400 text-sm">Email</h4>
-                  <p className="text-lg">hello@example.com</p>
+                  <p className="text-lg">jamesouko41@gmail.com</p>
                 </div>
               </div>
               
@@ -84,10 +84,7 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <div>
-                  <h4 className="text-gray-400 text-sm">Location</h4>
-                  <p className="text-lg">San Francisco, CA</p>
-                </div>
+            
               </div>
             </div>
             

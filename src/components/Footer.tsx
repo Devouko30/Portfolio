@@ -6,10 +6,7 @@ const Footer = () => {
     <footer className="bg-portfolio-dark pt-10 pb-6 text-gray-300">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <a href="#home" className="text-2xl font-bold text-white">Portfolio</a>
-            <p className="mt-2 text-gray-400">Crafting digital experiences.</p>
-          </div>
+          
           
           <div className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0">
             <div>
@@ -32,10 +29,10 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-3 text-white">Connect</h4>
               <ul className="space-y-2">
                 {[
-                  { name: 'GitHub', href: 'https://github.com' },
-                  { name: 'LinkedIn', href: 'https://linkedin.com' },
-                  { name: 'Twitter', href: 'https://twitter.com' },
-                  { name: 'Email', href: 'mailto:hello@example.com' }
+                  { name: 'GitHub', href: 'https://github.com/Devouko' },
+                  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/devouko/' },
+                  { name: 'TikTok', href: 'https://tiktok.com' },
+                  { name: 'Email', href: 'mailto:jamesouko41@gmail.com' }
                 ].map((item) => (
                   <li key={item.name}>
                     <a 
@@ -56,7 +53,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-10 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} Your Name. All rights reserved.
+              © {new Date().getFullYear()} Dev<span style={{color:'bg-portfolio-purple'}}>ouko</span>. All rights reserved. 
             </p>
             
             <div className="mt-4 md:mt-0">
