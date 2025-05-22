@@ -57,11 +57,11 @@ const About = () => {
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
               <img
-                src="images/profile.jpg"
+                src="/profile.jpg"
                 alt="Profile"
                 className="w-40 h-40 object-cover rounded-xl shadow-lg mb-6 md:mb-0"
               />
-              <p className="text-gray-300 text-lg mb-6 md:mb-0">
+              <p className="text-gray-700 dark:text-gray-300 text-lg mb-6 md:mb-0">
                 I am a Full Stack Web Developer with a rich and diverse background, driven by a fervor for innovation
                 and a genuine desire to make a meaningful impact through technology. I started coding about three years ago,
                 beginning with Java and then moving on to web technologies like HTML, CSS, JavaScript, and PHP.
@@ -79,45 +79,48 @@ const About = () => {
             className="mb-12"
           >
             <h3 className="text-2xl font-bold mb-6">Profile & Skills</h3>
-            <div className="flex flex-col md:flex-row items-start gap-8 mb-12">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="w-40 h-40 rounded-xl overflow-hidden shadow-lg flex-shrink-0 mx-auto md:mx-0"
-              >
-                <img
-                  src="/profile.jpg"
-                  alt="James Robert Ouko"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              <div className="flex-1">
-                <motion.h4 
-                  className="text-xl font-bold mb-4 text-portfolio-purple"
-                  initial={{ opacity: 0, y: -10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg mb-12">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
+                  className="w-40 h-40 rounded-xl overflow-hidden shadow-lg flex-shrink-0"
                 >
-                  Personal Info
-                </motion.h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {profileInfo.map((info, index) => (
-                    <motion.div 
-                      key={info.label} 
-                      className="flex flex-col"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">{info.label}</span>
-                      <span className="text-gray-900 dark:text-white font-medium">{info.value}</span>
-                    </motion.div>
-                  ))}
+                  <img
+                    src="/profile.jpg"
+                    alt="James Robert Ouko"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                <div className="flex-1">
+                  <motion.h4 
+                    className="text-xl font-bold mb-4 text-portfolio-purple"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                    Personal Info
+                  </motion.h4>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {profileInfo.map((info, index) => (
+                      <motion.div 
+                        key={info.label} 
+                        className="flex flex-col bg-gray-50 dark:bg-gray-700 p-3 rounded-lg shadow-sm"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">{info.label}</span>
+                        <span className="text-gray-900 dark:text-white font-bold">{info.value}</span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
