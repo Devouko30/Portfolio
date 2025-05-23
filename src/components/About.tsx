@@ -5,7 +5,7 @@ const About = () => {
   const skills = [
     // Backend
     { name: 'JAVA', level: 100, category: 'backend' },
-    { name: 'PHP', level: 100, category: 'backend' },
+    { name: 'LARAVEL', level: 100, category: 'backend' },
     { name: 'Node.js', level: 80, category: 'backend' },
     { name: 'SpringBoot', level: 100, category: 'backend' },
     { name: 'Express', level: 85, category: 'backend' },
@@ -57,7 +57,7 @@ const About = () => {
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
               <img
-                src="/profile.jpg"
+                src="images/profile.jpg"
                 alt="Profile"
                 className="w-40 h-40 object-cover rounded-xl shadow-lg mb-6 md:mb-0"
               />
@@ -88,11 +88,7 @@ const About = () => {
                   viewport={{ once: true }}
                   className="w-40 h-40 rounded-xl overflow-hidden shadow-lg flex-shrink-0"
                 >
-                  <img
-                    src="/profile.jpg"
-                    alt="James Robert Ouko"
-                    className="w-full h-full object-cover"
-                  />
+                 
                 </motion.div>
                 
                 <div className="flex-1">

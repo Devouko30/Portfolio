@@ -19,11 +19,11 @@ const projectsData: Project[] = [
     id: 1,
     title: 'E-commerce Platform',
     description: 'A full-featured e-commerce platform with product catalog, shopping cart, and checkout process.',
-    image: 'https://images.unsplash.com/photo-1661956602944-249bcd04b63f?auto=format&fit=crop&q=80&w=2340&h=1316',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    demoLink: 'https://example.com/demo',
-    githubLink: 'https://github.com/yourusername/ecommerce',
-    caseStudyLink: 'https://example.com/case-study',
+    image: 'images/com.png',
+    tags: ['Next js', 'Node.js', 'POSTGRESQL', 'Stripe'],
+    demoLink: 'https://ellitestore.vercel.app/',
+    githubLink: 'https://github.com/Devouko/ellitestore',
+    caseStudyLink:'https://ellitestore.vercel.app/',
   },
   {
     id: 2,
@@ -37,12 +37,12 @@ const projectsData: Project[] = [
   },
   {
     id: 3,
-    title: 'Portfolio Website',
-    description: 'A responsive portfolio website showcasing skills, projects, and contact information.',
-    image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&q=80&w=2340&h=1316',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+    title: 'Ai document assistant',
+    description: 'An AI-powered document assistant that generates responses to user queries based on the context of the document.',
+    image: 'images/doc.png',
+    tags: ['Langchain', 'RAG', 'Framer Motion','openAi',],
     demoLink: 'https://example.com/demo',
-    githubLink: 'https://github.com/yourusername/portfolio',
+    githubLink: 'https://github.com/Devouko/ai_Doc_assistant',
   }
 ];
 
