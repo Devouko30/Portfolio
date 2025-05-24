@@ -6,6 +6,9 @@
 @import "yet-another-react-lightbox/styles.css";
 @import "yet-another-react-lightbox/plugins/thumbnails.css";
 
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
