@@ -57,7 +57,7 @@ const About = () => {
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
               <img
-                src="/profile.jpg"
+                src="images/profile.jpg"
                 alt="Profile"
                 className="w-40 h-40 object-cover rounded-xl shadow-lg mb-6 md:mb-0"
               />
