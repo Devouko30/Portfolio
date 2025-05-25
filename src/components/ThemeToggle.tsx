@@ -19,7 +19,7 @@ const ThemeToggle = ({ currentTheme, toggleTheme }: ThemeToggleProps) => {
     >
       <motion.div
         initial={{ rotate: 0 }}
-        animate={{ rotate: currentTheme === 'dark' ? 180 : 0 }}
+        animate={{ rotate: currentTheme === 'light' ? 180 : 0 }}
         transition={{ duration: 0.5, type: 'spring' }}
       >
         {currentTheme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
