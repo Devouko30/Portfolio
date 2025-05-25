@@ -10,14 +10,19 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    // Check for saved theme preference or use system preference
+  const [theme, setTheme] = useState<'light' | 'dark'>('light'); // Default to light mode
+
+  useEffect(() => {
+    // Check for saved theme preference, but default to light
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      return savedTheme;
+    if (savedTheme === 'dark') {
+      setTheme('dark');
+    } else {
+      // Default to light mode regardless of system preference
+      setTheme('light');
+      localStorage.setItem('theme', 'light');
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  }, []);
 
   useEffect(() => {
     // Update document class when theme changes
