@@ -27,13 +27,13 @@ const projectsData: Project[] = [
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'A kanban-style task manager with drag-and-drop functionality and team collaboration features.',
-    image: 'https://images.unsplash.com/photo-1611224885990-2ae89598466f?auto=format&fit=crop&q=80&w=2340&h=1316',
-    tags: ['TypeScript', 'React', 'Firebase', 'Redux'],
-    demoLink: 'https://example.com/demo',
-    githubLink: 'https://github.com/yourusername/task-app',
-    videoLink: 'https://example.com/video',
+    title: 'Automated JOB Application App',
+    description: 'A Job Application App that automates the process of applying for jobs by integrating with job boards and sending applications on your behalf.',
+    image: 'images/Job.png',
+    tags: ['TypeScript', 'Vite', 'Firebase', 'Redux'],
+    demoLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
+    githubLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
+    videoLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const projectsData: Project[] = [
     description: 'An AI-powered document assistant that generates responses to user queries based on the context of the document.',
     image: 'images/doc.png',
     tags: ['Langchain', 'RAG', 'Framer Motion','openAi',],
-    demoLink: 'https://example.com/demo',
+    demoLink: 'https://github.com/Devouko/ai_Doc_assistant',
     githubLink: 'https://github.com/Devouko/ai_Doc_assistant',
   }
 ];

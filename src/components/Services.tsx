@@ -37,7 +37,7 @@ const Services = () => {
       ]
     },
     {
-      title: "Android Development",
+      title: "Mobile Development",
       icon: <Smartphone className="w-12 h-12 text-portfolio-purple" />,
       services: [
         "Android App Development", "Custom App Design", "Native App Development",
