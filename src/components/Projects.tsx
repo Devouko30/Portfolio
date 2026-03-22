@@ -1,172 +1,84 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, FileText, Video } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, FileText, Video } from 'lucide-react';
+import { Component as MorphingCardStack, type CardData } from '@/components/ui/morphing-card-stack';
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  demoLink?: string;
-  githubLink?: string;
-  caseStudyLink?: string;
-  videoLink?: string;
-}
-
-const projectsData: Project[] = [
+const projectCards: CardData[] = [
   {
-    id: 1,
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with product catalog, shopping cart, and checkout process.',
-    image: 'images/com.png',
-    tags: ['Next js', 'Node.js', 'POSTGRESQL', 'Stripe'],
-    demoLink: 'https://ellitestore.vercel.app/',
-    githubLink: 'https://github.com/Devouko/ellitestore',
-    caseStudyLink:'https://ellitestore.vercel.app/',
+    id: '4',
+    title: 'Thanickole Hotel Website',
+    description: 'Full hospitality website for The Thanickole Hotel — featuring room booking, gallery, amenities showcase, and contact system.',
+    image: 'images/thanickoleehotel.png',
+    icon: <ExternalLink className="h-4 w-4 text-[#cc005f]" />,
+    tags: ['WordPress', 'PHP', 'Hospitality', 'Booking'],
+    demoLink: 'https://thanickoleehotel.com',
   },
   {
-    id: 2,
-    title: 'Automated JOB Application App',
-    description: 'A Job Application App that automates the process of applying for jobs by integrating with job boards and sending applications on your behalf.',
+    id: '1',
+    title: 'E-commerce Platform',
+    description: 'Full-featured e-commerce platform with product catalog, shopping cart, and Stripe checkout.',
+    image: 'images/com.png',
+    icon: <ExternalLink className="h-4 w-4 text-[#cc005f]" />,
+    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe'],
+    demoLink: 'https://ellitestore.vercel.app/',
+    githubLink: 'https://github.com/Devouko/ellitestore',
+  },
+  {
+    id: '2',
+    title: 'Automated Job Application',
+    description: 'Automates job applications by integrating with job boards and sending applications on your behalf.',
     image: 'images/Job.png',
+    icon: <FileText className="h-4 w-4 text-[#cc005f]" />,
     tags: ['TypeScript', 'Vite', 'Firebase', 'Redux'],
     demoLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
     githubLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
-    videoLink: 'https://portfolio-git-main-devouko30s-projects.vercel.app/',
   },
   {
-    id: 3,
-    title: 'Ai document assistant',
-    description: 'An AI-powered document assistant that generates responses to user queries based on the context of the document.',
+    id: '3',
+    title: 'AI Document Assistant',
+    description: 'AI-powered document assistant that generates responses based on document context using RAG.',
     image: 'images/doc.png',
-    tags: ['Langchain', 'RAG', 'Framer Motion','openAi',],
+    icon: <Video className="h-4 w-4 text-[#cc005f]" />,
+    tags: ['Langchain', 'RAG', 'Framer Motion', 'OpenAI'],
     demoLink: 'https://github.com/Devouko/ai_Doc_assistant',
     githubLink: 'https://github.com/Devouko/ai_Doc_assistant',
-  }
+  },
 ];
 
-const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-  return (
-    <motion.div 
-      className="bg-black/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-portfolio-purple transition-all duration-300"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(139, 92, 246, 0.2)" }}
-    >
-      <div className="h-56 overflow-hidden">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
-        />
-      </div>
-      
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-        <p className="text-gray-400 mb-4">{project.description}</p>
-        
-        <div className="flex flex-wrap gap-2 mb-5">
-          {project.tags.map(tag => (
-            <span 
-              key={tag} 
-              className="px-3 py-1 bg-portfolio-purple/20 text-portfolio-purple rounded-full text-xs font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        
-        <div className="flex flex-wrap gap-3">
-          {project.demoLink && (
-            <motion.a 
-              href={project.demoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-portfolio-purple text-white rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ExternalLink size={16} />
-              Live Demo
-            </motion.a>
-          )}
-          
-          {project.githubLink && (
-            <motion.a 
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-portfolio-purple text-portfolio-purple rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Github size={16} />
-              Source Code
-            </motion.a>
-          )}
-          
-          {project.caseStudyLink && (
-            <motion.a 
-              href={project.caseStudyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-green-500 text-green-500 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FileText size={16} />
-              Case Study
-            </motion.a>
-          )}
-          
-          {project.videoLink && (
-            <motion.a 
-              href={project.videoLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg text-sm font-medium inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Video size={16} />
-              Video Demo
-            </motion.a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+const Projects = () => (
+  <section id="projects" className="relative py-32 bg-black overflow-hidden">
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
+    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#cc005f]/30 to-transparent" />
 
-const Projects = () => {
-  return (
-    <section id="projects" className="py-20 bg-black text-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Portfolio</h2>
-          <div className="h-1 w-20 bg-portfolio-purple mx-auto mb-8"></div>
-          <p className="text-gray-400 max-w-xl mx-auto">
-            Here is a small sample of my projects.
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+    <div className="container mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="mb-20"
+      >
+        <p className="text-[#cc005f] text-xs tracking-[0.4em] uppercase font-light mb-3">02 — Work</p>
+        <h2 className="text-4xl md:text-5xl font-extralight text-white tracking-wide">Selected Projects</h2>
+        <div className="section-line mt-4" />
+        <p className="text-white/30 text-sm font-light mt-4">
+          Stack · swipe or use the layout toggle to explore
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+      >
+        <MorphingCardStack
+          cards={projectCards}
+          defaultLayout="stack"
+          className="max-w-5xl mx-auto"
+        />
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default Projects;

@@ -1,78 +1,56 @@
-
 import { motion } from 'framer-motion';
+import { Github, Linkedin, Twitter, Facebook, ArrowUp } from 'lucide-react';
 
-const Footer = () => {
-  return (
-    <footer className="bg-portfolio-dark pt-10 pb-6 text-gray-300">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          
-          
-          <div className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0">
-            <div>
-              <h4 className="text-lg font-semibold mb-3 text-white">Navigation</h4>
-              <ul className="space-y-2">
-                {['Home', 'About', 'Projects', 'Contact'].map((item) => (
-                  <li key={item}>
-                    <a 
-                      href={`#${item.toLowerCase()}`} 
-                      className="text-gray-400 hover:text-portfolio-light-purple transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-3 text-white">Connect</h4>
-              <ul className="space-y-2">
-                {[
-                  { name: 'GitHub', href: 'https://github.com/Devouko' },
-                  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/devouko/' },
-                  { name: 'TikTok', href: 'https://tiktok.com' },
-                  { name: 'Email', href: 'mailto:jamesouko41@gmail.com' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <a 
-                      href={item.href} 
-                      className="text-gray-400 hover:text-portfolio-light-purple transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-800 mt-10 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} Dev<span style={{color:'bg-portfolio-purple'}}>ouko</span>. All rights reserved. 
-            </p>
-            
-            <div className="mt-4 md:mt-0">
-              <motion.a 
-                href="#home"
-                className="inline-block p-2 rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                </svg>
-              </motion.a>
-            </div>
-          </div>
-        </div>
+const socials = [
+  { icon: Github,   href: 'https://github.com/Devouko',  label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com',         label: 'LinkedIn' },
+  { icon: Twitter,  href: 'https://twitter.com',          label: 'Twitter' },
+  { icon: Facebook, href: 'https://facebook.com',         label: 'Facebook' },
+];
+
+const Footer = () => (
+  <footer
+    className="relative py-10 overflow-hidden"
+    style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #000 100%)' }}
+  >
+    {/* Top edge */}
+    <div className="absolute top-0 left-0 right-0 h-px"
+      style={{ background: 'linear-gradient(90deg, transparent, rgba(204,0,95,0.3), transparent)' }} />
+
+    <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* Brand */}
+      <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-light">
+        Dev<span className="text-[#cc005f]">ouko</span> &nbsp;·&nbsp; © {new Date().getFullYear()}
+      </p>
+
+      {/* Socials */}
+      <div className="flex items-center gap-5">
+        {socials.map(({ icon: Icon, href, label }) => (
+          <motion.a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className="text-white/20 hover:text-[#cc005f] transition-colors duration-300"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Icon size={15} />
+          </motion.a>
+        ))}
       </div>
-    </footer>
-  );
-};
+
+      {/* Back to top */}
+      <motion.a
+        href="#home"
+        className="flex items-center gap-2 text-white/20 hover:text-white text-xs tracking-[0.2em] uppercase font-light transition-colors"
+        whileHover={{ y: -2 }}
+      >
+        <ArrowUp size={13} /> Top
+      </motion.a>
+    </div>
+  </footer>
+);
 
 export default Footer;

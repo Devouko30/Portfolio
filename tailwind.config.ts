@@ -16,7 +16,8 @@ const config: Config = {
         "portfolio-light": "#f4f4f4",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Space Grotesk", "Inter", "sans-serif"],
+        mono: ["Space Mono", "monospace"],
       },
     },
   },

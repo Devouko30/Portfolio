@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,73 +13,72 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 96%;
 
-    /* Updated primary and secondary colors */
-    --primary: 336 100% 40%;  /* #cc005f */
-    --primary-foreground: 0 0% 96%;  /* #f4f4f4 */
+    --primary: 336 100% 40%;
+    --primary-foreground: 0 0% 96%;
 
-    --secondary: 336 100% 30%;  /* #990047 */
-    --secondary-foreground: 0 0% 96%;  /* #f4f4f4 */
+    --secondary: 336 100% 30%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 336 100% 40%;  /* #cc005f */
-    --accent-foreground: 0 0% 96%;  /* #f4f4f4 */
+    --accent: 336 100% 40%;
+    --accent-foreground: 0 0% 96%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 336 100% 30%;
+    --destructive-foreground: 0 0% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 336 100% 40%;  /* #cc005f */
+    --border: 0 0% 12%;
+    --input: 0 0% 8%;
+    --ring: 336 100% 40%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 0%;  /* #000 */
-    --foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --primary: 336 100% 40%;  /* #cc005f */
-    --primary-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --secondary: 336 100% 30%;  /* #990047 */
-    --secondary-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 336 100% 40%;  /* #cc005f */
-    --accent-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 96%;  /* #f4f4f4 */
-
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 336 100% 40%;  /* #cc005f */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 336 100% 40%;
+    --primary-foreground: 0 0% 96%;
+    --secondary: 336 100% 30%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 336 100% 40%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 336 100% 30%;
+    --destructive-foreground: 0 0% 96%;
+    --border: 0 0% 12%;
+    --input: 0 0% 8%;
+    --ring: 336 100% 40%;
   }
 }
 
 @layer base {
   body {
-    @apply bg-white dark:bg-black text-gray-900 dark:text-white;
+    @apply bg-black text-white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
   }
 }
 
@@ -92,15 +93,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900;
+  background: #0a0a0f;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  background: rgba(204,0,95,0.3);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-600;
+  background: rgba(204,0,95,0.5);
 }
 
 /* Transition for theme changes */
@@ -123,7 +125,8 @@ body {
 }
 
 .project-info {
-  @apply p-4 bg-white dark:bg-gray-800;
+  @apply p-4;
+  background: rgba(255,255,255,0.04);
 }
 
 /* Custom button styles with primary color */
@@ -151,4 +154,101 @@ body {
 
 .hover\:bg-portfolio-purple:hover {
   background-color: #cc005f;
+}
+
+/* ── Futuristic glassmorphism utilities ── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-pink {
+  background: rgba(204, 0, 95, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(204, 0, 95, 0.2);
+}
+
+/* Glow effects */
+.glow-pink {
+  box-shadow: 0 0 30px rgba(204, 0, 95, 0.15), 0 0 60px rgba(204, 0, 95, 0.05);
+}
+
+.glow-pink-sm {
+  box-shadow: 0 0 15px rgba(204, 0, 95, 0.2);
+}
+
+/* Slim tracking */
+.tracking-ultra {
+  letter-spacing: 0.3em;
+}
+
+/* Scanline overlay for futuristic feel */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* Section divider line */
+.section-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, #cc005f, transparent);
+}
+
+/* ── Glowing card animations ── */
+@keyframes border-follow {
+  0%   { left: 0%;   top: 0%;    transform: translate(-50%, -50%); }
+  25%  { left: 100%; top: 0%;    transform: translate(-50%, -50%); }
+  50%  { left: 100%; top: 100%;  transform: translate(-50%, -50%); }
+  75%  { left: 0%;   top: 100%;  transform: translate(-50%, -50%); }
+  100% { left: 0%;   top: 0%;    transform: translate(-50%, -50%); }
+}
+
+@keyframes glow-color-cycle {
+  0%   { color: #cc005f; }
+  50%  { color: #ff4d9e; }
+  100% { color: #cc005f; }
+}
+
+@keyframes glow-border-cycle {
+  0%   { border-color: #cc005f; box-shadow: 0 0 12px #cc005f, inset 0 0 12px rgba(204,0,95,0.05); }
+  50%  { border-color: #ff4d9e; box-shadow: 0 0 12px #ff4d9e, inset 0 0 12px rgba(255,77,158,0.05); }
+  100% { border-color: #cc005f; box-shadow: 0 0 12px #cc005f, inset 0 0 12px rgba(204,0,95,0.05); }
+}
+
+.glow-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cc005f;
+  color: #cc005f;
+  box-shadow: 0 0 14px 4px #cc005f;
+  z-index: 20;
+  pointer-events: none;
+  animation: border-follow var(--anim-duration, 5s) linear infinite;
+}
+
+.glow-border {
+  border: 1px solid transparent;
+  animation: glow-border-cycle var(--anim-duration, 5s) linear infinite;
 }

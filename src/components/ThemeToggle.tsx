@@ -10,7 +10,8 @@ const ThemeToggle = ({ currentTheme, toggleTheme }: ThemeToggleProps) => {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="p-3 rounded-full bg-portfolio-purple text-white shadow-lg hover:shadow-portfolio-purple/50"
+      className="p-3 rounded-full text-white shadow-lg"
+      style={{ background: 'rgba(204,0,95,0.8)', boxShadow: '0 0 20px rgba(204,0,95,0.3)' }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       initial={{ opacity: 0, y: 20 }}

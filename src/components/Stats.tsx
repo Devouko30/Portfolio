@@ -13,13 +13,13 @@ const statItems = [
 
 const Stats = () => {
   return (
-    <section className="bg-gray-700 text-white py-16">
+    <section className="relative py-16 overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0">
           {statItems.map((item, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center border-r border-gray-600 last:border-r-0 p-4"
+              className="flex flex-col items-center border-r border-white/5 last:border-r-0 p-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -36,7 +36,7 @@ const Stats = () => {
                   delay: 0.1 + index * 0.1
                 }}
               >
-                <item.icon className="h-10 w-10 mb-3 text-portfolio-purple" />
+                <item.icon className="h-10 w-10 mb-3 text-[#cc005f]" />
               </motion.div>
               <motion.p 
                 className="text-4xl md:text-5xl font-bold text-white mb-2"
