@@ -6,7 +6,7 @@ const projectCards: CardData[] = [
   {
     id: '4',
     title: 'Thanickole Hotel Website',
-    description: 'Full hospitality website for The Thanickole Hotel — featuring room booking, gallery, amenities showcase, and contact system.',
+    description: 'Full hospitality platform for The Thanickole Hotel — room booking engine, gallery, amenities showcase, and contact system. Optimised for SEO and mobile.',
     image: 'images/thanickoleehotel.png',
     icon: <ExternalLink className="h-4 w-4 text-[#cc005f]" />,
     tags: ['WordPress', 'PHP', 'Hospitality', 'Booking'],
@@ -15,7 +15,7 @@ const projectCards: CardData[] = [
   {
     id: '1',
     title: 'E-commerce Platform',
-    description: 'Full-featured e-commerce platform with product catalog, shopping cart, and Stripe checkout.',
+    description: 'Production e-commerce platform with dynamic product catalog, cart management, Stripe checkout, and order tracking. Built for scale with SSR and PostgreSQL.',
     image: 'images/com.png',
     icon: <ExternalLink className="h-4 w-4 text-[#cc005f]" />,
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe'],
@@ -25,7 +25,7 @@ const projectCards: CardData[] = [
   {
     id: '2',
     title: 'Automated Job Application',
-    description: 'Automates job applications by integrating with job boards and sending applications on your behalf.',
+    description: 'Intelligent job application automation — integrates with major job boards, parses listings, and submits tailored applications. Saves hours of manual work daily.',
     image: 'images/Job.png',
     icon: <FileText className="h-4 w-4 text-[#cc005f]" />,
     tags: ['TypeScript', 'Vite', 'Firebase', 'Redux'],
@@ -35,7 +35,7 @@ const projectCards: CardData[] = [
   {
     id: '3',
     title: 'AI Document Assistant',
-    description: 'AI-powered document assistant that generates responses based on document context using RAG.',
+    description: 'RAG-powered document assistant using LangChain and OpenAI. Upload any document and get accurate, context-aware answers — no hallucinations, just grounded responses.',
     image: 'images/doc.png',
     icon: <Video className="h-4 w-4 text-[#cc005f]" />,
     tags: ['Langchain', 'RAG', 'Framer Motion', 'OpenAI'],
@@ -61,7 +61,7 @@ const Projects = () => (
         <h2 className="text-4xl md:text-5xl font-extralight text-white tracking-wide">Selected Projects</h2>
         <div className="section-line mt-4" />
         <p className="text-white/30 text-sm font-light mt-4">
-          Stack · swipe or use the layout toggle to explore
+          Production systems shipped across web, mobile, and AI — swipe or toggle layout to explore.
         </p>
       </motion.div>
 

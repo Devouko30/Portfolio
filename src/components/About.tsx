@@ -87,8 +87,9 @@ const About = () => (
               />
             </div>
             <p className="text-white/50 font-light leading-relaxed text-sm">
-              Full Stack Web Developer driven by a passion for innovation. Started coding three years ago with Java,
-              then expanded into web and mobile technologies. I build products that are fast, scalable, and beautiful.
+              Senior Software Engineer with 6+ years building production-grade systems across web, mobile, and cloud.
+              I architect scalable APIs, ship polished mobile apps, and lead full-stack projects from concept to deployment.
+              Passionate about clean code, performance, and products that actually solve real problems.
             </p>
           </motion.div>
 
@@ -148,6 +149,28 @@ const About = () => (
           ))}
         </div>
       </div>
+      {/* Tech stack strip */}
+      <motion.div
+        {...fadeUp(0.3)}
+        className="mt-4 pt-12 border-t border-white/5"
+      >
+        <p className="text-white/20 text-[10px] tracking-[0.4em] uppercase font-light text-center mb-6">Core Stack</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          {['React', 'Next.js', 'TypeScript', 'Node.js', 'Spring Boot', 'Java', 'PHP', 'Python', 'Flutter', 'Android', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS', 'Redis', 'GraphQL'].map((tech, i) => (
+            <motion.span
+              key={tech}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: i * 0.03 }}
+              viewport={{ once: true }}
+              className="px-3 py-1.5 rounded-md text-[10px] tracking-[0.15em] uppercase font-light text-white/40 border border-white/8 hover:border-[#cc005f]/40 hover:text-white/70 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.03)' }}
+            >
+              {tech}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
     </div>
   </section>
 );

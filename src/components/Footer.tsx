@@ -18,10 +18,17 @@ const Footer = () => (
       style={{ background: 'linear-gradient(90deg, transparent, rgba(204,0,95,0.3), transparent)' }} />
 
     <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      {/* Brand */}
-      <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-light">
-        Dev<span className="text-[#cc005f]">ouko</span> &nbsp;·&nbsp; © {new Date().getFullYear()}
-      </p>
+      {/* Brand + tagline */}
+      <div className="flex flex-col items-center md:items-start gap-1">
+        <p className="text-white/40 text-xs tracking-[0.3em] uppercase font-light">
+          Dev<span className="text-[#cc005f]">ouko</span> &nbsp;·&nbsp; © {new Date().getFullYear()}
+        </p>
+        <p className="text-white/20 text-[10px] tracking-[0.2em] font-light">Senior Software Engineer · Nairobi, Kenya</p>
+        <div className="flex items-center gap-1.5 mt-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-white/20 text-[10px] tracking-[0.2em] uppercase font-light">Open to opportunities</span>
+        </div>
+      </div>
 
       {/* Socials */}
       <div className="flex items-center gap-5">

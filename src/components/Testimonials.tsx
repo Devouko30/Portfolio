@@ -5,25 +5,25 @@ import { LiquidButton } from '@/components/ui/liquid-glass-button';
 const testimonials = [
   {
     img: 'https://randomuser.me/api/portraits/men/32.jpg',
-    quote: "James delivered our e-commerce platform ahead of schedule. The code quality and attention to detail were exceptional — exactly what we needed.",
+    quote: "James architected our entire e-commerce backend from scratch — clean API design, solid database schema, and delivered two weeks ahead of schedule. Rare to find that level of ownership.",
     name: 'David K.',
     role: 'CEO, RetailCo',
   },
   {
     img: 'https://randomuser.me/api/portraits/women/44.jpg',
-    quote: "Working with James on our Android app was a great experience. He understood our requirements perfectly and built something our users love.",
+    quote: "Our Android app went from wireframe to Play Store in 6 weeks. James handled everything — architecture, UI, testing, deployment. The code is clean enough that our in-house team can maintain it easily.",
     name: 'Sarah M.',
     role: 'Product Manager, TechStart',
   },
   {
     img: 'https://randomuser.me/api/portraits/men/67.jpg',
-    quote: "The API architecture James designed for us is clean, well-documented, and scales beautifully. Highly recommend for any backend work.",
+    quote: "The API James designed handles 50k+ requests/day without breaking a sweat. Well-documented, versioned, and secured properly. He thinks like a senior engineer, not just a developer.",
     name: 'Alex R.',
     role: 'CTO, DataFlow Inc.',
   },
   {
     img: 'https://randomuser.me/api/portraits/women/28.jpg',
-    quote: "James rebuilt our legacy system into a modern full-stack application. The performance improvements were immediately noticeable.",
+    quote: "James migrated our legacy PHP monolith to a modern microservices stack. Zero downtime, 3x performance improvement, and the team was onboarded in days. Exceptional work.",
     name: 'Amina W.',
     role: 'Founder, NovaSoft',
   },

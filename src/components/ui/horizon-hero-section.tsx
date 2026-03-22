@@ -29,6 +29,40 @@ interface HorizonHeroProps {
   subtitle?: string;
 }
 
+// Typewriter hook
+const useTypewriter = (words: string[], speed = 80, pause = 2000) => {
+  const [displayed, setDisplayed] = React.useState('');
+  const [wordIndex, setWordIndex] = React.useState(0);
+  const [charIndex, setCharIndex] = React.useState(0);
+  const [deleting, setDeleting] = React.useState(false);
+
+  React.useEffect(() => {
+    const current = words[wordIndex % words.length];
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setDisplayed(current.slice(0, charIndex + 1));
+        if (charIndex + 1 === current.length) {
+          setTimeout(() => setDeleting(true), pause);
+        } else {
+          setCharIndex(c => c + 1);
+        }
+      } else {
+        setDisplayed(current.slice(0, charIndex - 1));
+        if (charIndex - 1 === 0) {
+          setDeleting(false);
+          setWordIndex(w => w + 1);
+          setCharIndex(0);
+        } else {
+          setCharIndex(c => c - 1);
+        }
+      }
+    }, deleting ? speed / 2 : speed);
+    return () => clearTimeout(timeout);
+  }, [charIndex, deleting, wordIndex, words, speed, pause]);
+
+  return displayed;
+};
+
 export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', subtitle = 'Building the future, one line at a time' }: HorizonHeroProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -41,6 +75,15 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
   const [currentSection, setCurrentSection] = useState(1);
   const [isReady, setIsReady] = useState(false);
   const totalSections = 2;
+
+  const typewriterText = useTypewriter([
+    'Full Stack Web Developer',
+    'Mobile App Engineer',
+    'API Architect',
+    'React & Node.js Expert',
+    'Flutter Developer',
+    'Cloud & DevOps Engineer',
+  ], 70, 2200);
 
   const threeRefs = useRef<ThreeRefs>({
     scene: null, camera: null, renderer: null, composer: null,
@@ -271,7 +314,9 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
   }, [totalSections]);
 
   const splitTitle = (text: string) =>
-    text.split('').map((char, i) => <span key={i} className="title-char inline-block">{char === ' ' ? '\u00A0' : char}</span>);
+    text.split('').map((char, i) => (
+      <span key={i} className="title-char inline-block">{char === ' ' ? '\u00A0' : char}</span>
+    ));
 
   return (
     <div ref={containerRef} className="hero-container relative">
@@ -299,9 +344,65 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
             </span>
           ))}
         </h1>
-        <div ref={subtitleRef} className="mt-6 text-center" style={{ visibility: 'hidden' }}>
-          <p className="subtitle-line text-white/70 text-sm md:text-base tracking-[0.4em] uppercase font-light">{title}</p>
-          <p className="subtitle-line text-white/50 text-xs md:text-sm tracking-[0.3em] uppercase font-light mt-2">{subtitle}</p>
+      {/* Hero content — fixed overlay */}
+      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
+        <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
+          {name.toUpperCase().split(' ').map((word, wi) => (
+            <span key={wi} className={wi === 0 ? 'text-white' : 'text-[#cc005f]'}>
+              {word.split('').map((char, i) => (
+                <span key={i} className="title-char inline-block">{char}</span>
+              ))}
+              {wi < name.split(' ').length - 1 && <span className="title-char inline-block">&nbsp;</span>}
+            </span>
+          ))}
+        </h1>
+        <div ref={subtitleRef} className="mt-6 text-center px-4" style={{ visibility: 'hidden' }}>
+          {/* Typewriter role */}
+          <p className="subtitle-line text-sm md:text-base tracking-[0.3em] uppercase font-light mb-1" style={{ minHeight: '1.5em' }}>
+            <span className="text-white/80">{typewriterText}</span>
+            <span className="text-[#cc005f] animate-pulse">|</span>
+          </p>
+          <p className="subtitle-line text-white/35 text-xs tracking-[0.35em] uppercase font-light mt-2">{subtitle}</p>
+
+          {/* Quick stats */}
+          <div className="subtitle-line flex items-center justify-center gap-6 mt-6">
+            {[
+              { value: '6+', label: 'Years' },
+              { value: '40+', label: 'Projects' },
+              { value: '15+', label: 'Clients' },
+            ].map(({ value, label }) => (
+              <div key={label} className="flex flex-col items-center gap-0.5">
+                <span className="text-white text-lg font-bold tracking-wide">{value}</span>
+                <span className="text-white/30 text-[10px] tracking-[0.25em] uppercase font-light">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="subtitle-line flex items-center justify-center gap-4 mt-6 pointer-events-auto">
+            <a
+              href="#projects"
+              onClick={e => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className="px-6 py-2.5 rounded-lg text-xs tracking-[0.2em] uppercase font-light text-white transition-all duration-300"
+              style={{ background: 'rgba(204,0,95,0.85)', border: '1px solid rgba(204,0,95,0.5)' }}
+            >
+              View Work
+            </a>
+            <a
+              href="#contact"
+              onClick={e => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className="px-6 py-2.5 rounded-lg text-xs tracking-[0.2em] uppercase font-light text-white/70 hover:text-white transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+            >
+              Hire Me
+            </a>
+          </div>
+
+          {/* Available badge */}
+          <div className="subtitle-line flex items-center justify-center gap-2 mt-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase font-light">Available for new projects</span>
+          </div>
         </div>
       </div>
 

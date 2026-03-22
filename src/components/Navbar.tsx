@@ -93,6 +93,19 @@ const Navbar = ({ currentTheme, toggleTheme }: NavbarProps) => {
               )}
             </motion.a>
           ))}
+          <motion.a
+            href="#contact"
+            onClick={(e) => scrollToSection(e, '#contact')}
+            className="text-xs tracking-[0.2em] uppercase font-light px-4 py-2 rounded-lg text-white transition-all duration-300"
+            style={{ background: 'rgba(204,0,95,0.85)', border: '1px solid rgba(204,0,95,0.4)' }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Hire Me
+          </motion.a>
         </nav>
 
         {/* Mobile toggle */}

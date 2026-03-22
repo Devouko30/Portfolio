@@ -7,7 +7,7 @@ const Hero = () => {
       <HorizonHero
         name="Dev Ouko"
         title="Full Stack Developer · Mobile Developer"
-        subtitle="Building the future, one line at a time"
+        subtitle="From Figma to App Store · Web · Mobile · Cloud"
       />
 
       {/* Social links */}

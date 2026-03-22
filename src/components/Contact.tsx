@@ -65,7 +65,7 @@ const Contact = () => {
         >
           <ContactCard
             title="Let's work together"
-            description="Have a project in mind or want to collaborate? Fill out the form and I'll get back to you within 1 business day."
+            description="Have a project in mind, need a technical co-founder, or want to scale your engineering team? Fill out the form and I'll respond within 1 business day."
             contactInfo={contactInfo}
             formSectionClassName="bg-transparent"
           >

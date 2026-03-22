@@ -42,21 +42,21 @@ const Index = ({ currentTheme, toggleTheme }: IndexProps) => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>James Robert Ouko | Full Stack Developer &amp; Mobile Developer</title>
-        <meta name="title" content="James Robert Ouko | Full Stack Developer & Mobile Developer" />
-        <meta name="description" content="Professional portfolio of James Robert Ouko, a Full Stack Web Developer and Mobile Developer with expertise in Java, PHP, React, and Android development." />
-        <meta name="keywords" content="James Robert Ouko, Full Stack Developer, Mobile Developer, Web Development, API Design, Java Developer, PHP Developer, React Developer, Android Developer" />
+        <title>James Robert Ouko | Senior Full Stack & Mobile Engineer</title>
+        <meta name="title" content="James Robert Ouko | Senior Full Stack & Mobile Engineer" />
+        <meta name="description" content="Senior Software Engineer with 6+ years building production-grade web apps, mobile apps, and APIs. React, Node.js, Flutter, Spring Boot, AWS. Based in Nairobi, Kenya." />
+        <meta name="keywords" content="James Robert Ouko, Senior Software Engineer, Full Stack Developer, Mobile Developer, React Developer, Node.js, Flutter, Spring Boot, Android, API Architect, Nairobi Kenya" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://portfolio-devouko30s-projects.vercel.app/" />
-        <meta property="og:title" content="James Robert Ouko | Full Stack Developer & Mobile Developer" />
-        <meta property="og:description" content="Professional portfolio of James Robert Ouko, a Full Stack Web Developer and Mobile Developer with expertise in Java, PHP, React, and Android development." />
-        <meta property="og:image" content="https://portfolio-devouko30s-projects.vercel.app/profile.jpg" />
+        <meta property="og:url" content="https://devouko.netlify.app/" />
+        <meta property="og:title" content="James Robert Ouko | Senior Full Stack & Mobile Engineer" />
+        <meta property="og:description" content="Senior Software Engineer with 6+ years building production-grade web apps, mobile apps, and APIs. React, Node.js, Flutter, Spring Boot, AWS." />
+        <meta property="og:image" content="https://devouko.netlify.app/images/profile.jpg" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://portfolio-devouko30s-projects.vercel.app/" />
-        <meta property="twitter:title" content="James Robert Ouko | Full Stack Developer & Mobile Developer" />
-        <meta property="twitter:description" content="Professional portfolio of James Robert Ouko, a Full Stack Web Developer and Mobile Developer with expertise in Java, PHP, React, and Android development." />
-        <meta property="twitter:image" content="https://portfolio-devouko30s-projects.vercel.app/profile.jpg" />
-        <link rel="canonical" href="https://portfolio-devouko30s-projects.vercel.app/" />
+        <meta property="twitter:url" content="https://devouko.netlify.app/" />
+        <meta property="twitter:title" content="James Robert Ouko | Senior Full Stack & Mobile Engineer" />
+        <meta property="twitter:description" content="Senior Software Engineer with 6+ years building production-grade web apps, mobile apps, and APIs. React, Node.js, Flutter, Spring Boot, AWS." />
+        <meta property="twitter:image" content="https://devouko.netlify.app/images/profile.jpg" />
+        <link rel="canonical" href="https://devouko.netlify.app/" />
       </Helmet>
 
       <AnimatePresence mode="wait">
