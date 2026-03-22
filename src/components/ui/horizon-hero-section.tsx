@@ -284,13 +284,20 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
           <span className="block w-4 h-0.5 bg-[#cc005f]"></span>
           <span className="block w-6 h-0.5 bg-[#cc005f]"></span>
         </div>
-        <div className="text-white text-xs tracking-[0.3em] font-light" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>PORTFOLIO</div>
+
       </div>
 
       {/* Hero content â€” fixed so it stays visible while scrolling through the 3D scene */}
       <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
-        <h1 ref={titleRef} className="text-white font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
-          {splitTitle(name.toUpperCase())}
+        <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
+          {name.toUpperCase().split(' ').map((word, wi) => (
+            <span key={wi} className={wi === 0 ? 'text-white' : 'text-[#cc005f]'}>
+              {word.split('').map((char, i) => (
+                <span key={i} className="title-char inline-block">{char}</span>
+              ))}
+              {wi < name.split(' ').length - 1 && <span className="title-char inline-block">&nbsp;</span>}
+            </span>
+          ))}
         </h1>
         <div ref={subtitleRef} className="mt-6 text-center" style={{ visibility: 'hidden' }}>
           <p className="subtitle-line text-white/70 text-sm md:text-base tracking-[0.4em] uppercase font-light">{title}</p>
