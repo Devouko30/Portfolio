@@ -1,6 +1,98 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Download, ArrowRight } from 'lucide-react';
 import { GlowingCard } from '@/components/ui/glowing-card';
+import React, { useEffect, useRef, useState } from 'react';
+
+const CODE_LINES = [
+  { text: 'const engineer = {',              color: '#c084fc' },
+  { text: '  name: "James Robert Ouko",',    color: '#86efac' },
+  { text: '  role: "Senior Software Eng.",', color: '#86efac' },
+  { text: '  location: "Nairobi, Kenya",',   color: '#86efac' },
+  { text: '  stack: [',                      color: '#93c5fd' },
+  { text: '    "React", "Next.js",',         color: '#fde68a' },
+  { text: '    "Node.js", "Spring Boot",',   color: '#fde68a' },
+  { text: '    "Flutter", "AWS",',           color: '#fde68a' },
+  { text: '  ],',                            color: '#93c5fd' },
+  { text: '  experience: "6+ years",',       color: '#86efac' },
+  { text: '  projects: 40,',                 color: '#fb923c' },
+  { text: '  available: true,',              color: '#cc005f' },
+  { text: '  hire: () => contact(),',        color: '#c084fc' },
+  { text: '};',                              color: '#c084fc' },
+];
+
+const useCodeTyper = (active: boolean, speed = 22) => {
+  const [lineIndex, setLineIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [committed, setCommitted] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!active || lineIndex >= CODE_LINES.length) return;
+    const current = CODE_LINES[lineIndex].text;
+    if (charIndex < current.length) {
+      const t = setTimeout(() => setCharIndex(c => c + 1), speed);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => {
+      setCommitted(l => [...l, current]);
+      setLineIndex(i => i + 1);
+      setCharIndex(0);
+    }, 55);
+    return () => clearTimeout(t);
+  }, [active, lineIndex, charIndex, speed]);
+
+  const partial = lineIndex < CODE_LINES.length ? CODE_LINES[lineIndex].text.slice(0, charIndex) : '';
+  return { committed, partial, lineIndex };
+};
+
+const AboutCodeBlock = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { committed, partial, lineIndex } = useCodeTyper(inView);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true }}
+      className="rounded-xl overflow-hidden"
+      style={{
+        background: 'rgba(8,8,12,0.9)',
+        border: '1px solid rgba(255,255,255,0.07)',
+        boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(204,0,95,0.06)',
+      }}
+    >
+      {/* Title bar */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5"
+        style={{ background: 'rgba(255,255,255,0.03)' }}>
+        <span className="w-3 h-3 rounded-full bg-red-500/80" />
+        <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+        <span className="w-3 h-3 rounded-full bg-green-500/80" />
+        <span className="ml-3 text-white/25 text-[11px] tracking-widest font-mono">engineer.ts</span>
+        <span className="ml-auto text-white/15 text-[10px] font-mono">TypeScript</span>
+      </div>
+      {/* Code */}
+      <div className="px-5 py-5 font-mono text-[12px] leading-7 overflow-x-auto">
+        {/* Line numbers + code */}
+        {committed.map((line, i) => (
+          <div key={i} className="flex gap-4">
+            <span className="select-none text-white/15 w-4 text-right flex-shrink-0">{i + 1}</span>
+            <span style={{ color: CODE_LINES[i]?.color ?? '#e2e8f0' }}>{line}</span>
+          </div>
+        ))}
+        {lineIndex < CODE_LINES.length && (
+          <div className="flex gap-4">
+            <span className="select-none text-white/15 w-4 text-right flex-shrink-0">{committed.length + 1}</span>
+            <span style={{ color: CODE_LINES[lineIndex]?.color ?? '#e2e8f0' }}>
+              {partial}<span className="animate-pulse" style={{ color: '#cc005f' }}>▋</span>
+            </span>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -74,7 +166,7 @@ const About = () => (
         <div className="section-line mt-4" />
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
         {/* Left — bio + profile info */}
         <div className="space-y-8">
           <motion.div {...fadeUp(0.1)} className="flex items-start gap-6">
@@ -134,6 +226,12 @@ const About = () => (
             </motion.a>
           </motion.div>
         </div>
+
+        {/* Middle — code snippet */}
+        <motion.div {...fadeUp(0.2)} className="flex flex-col justify-center">
+          <p className="text-white/20 text-[10px] tracking-[0.4em] uppercase font-light mb-4">// in code</p>
+          <AboutCodeBlock />
+        </motion.div>
 
         {/* Right — skills */}
         <div className="space-y-8">

@@ -407,9 +407,6 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
         </div>
       </div>
 
-      {/* Code snippet terminal */}
-      <CodeSnippet />
-
       {/* Hero content */}
       <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
         <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
