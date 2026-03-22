@@ -29,6 +29,87 @@ interface HorizonHeroProps {
   subtitle?: string;
 }
 
+// Code snippet auto-typer
+const CODE_LINES = [
+  { text: 'const engineer = {',         color: 'text-purple-400' },
+  { text: '  name: "James Ouko",',      color: 'text-green-400' },
+  { text: '  role: "Senior SWE",',      color: 'text-green-400' },
+  { text: '  stack: [',                 color: 'text-blue-400' },
+  { text: '    "React", "Node.js",',    color: 'text-yellow-300' },
+  { text: '    "Flutter", "AWS",',      color: 'text-yellow-300' },
+  { text: '    "Spring Boot",',         color: 'text-yellow-300' },
+  { text: '  ],',                       color: 'text-blue-400' },
+  { text: '  available: true,',         color: 'text-[#cc005f]' },
+  { text: '  hire: () => {',            color: 'text-purple-400' },
+  { text: '    return "Let\'s build";', color: 'text-green-400' },
+  { text: '  }',                        color: 'text-purple-400' },
+  { text: '};',                         color: 'text-purple-400' },
+];
+
+const useCodeTyper = (speed = 28) => {
+  const [lineIndex, setLineIndex] = React.useState(0);
+  const [charIndex, setCharIndex] = React.useState(0);
+  const [lines, setLines] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    if (lineIndex >= CODE_LINES.length) return;
+    const current = CODE_LINES[lineIndex].text;
+    if (charIndex < current.length) {
+      const t = setTimeout(() => setCharIndex(c => c + 1), speed);
+      return () => clearTimeout(t);
+    } else {
+      const t = setTimeout(() => {
+        setLines(l => [...l, current]);
+        setLineIndex(i => i + 1);
+        setCharIndex(0);
+      }, 60);
+      return () => clearTimeout(t);
+    }
+  }, [lineIndex, charIndex, speed]);
+
+  const currentPartial = lineIndex < CODE_LINES.length
+    ? CODE_LINES[lineIndex].text.slice(0, charIndex)
+    : '';
+
+  return { lines, currentPartial, lineIndex };
+};
+
+const CodeSnippet = () => {
+  const { lines, currentPartial, lineIndex } = useCodeTyper(22);
+
+  return (
+    <div
+      className="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-20 w-72 rounded-xl overflow-hidden"
+      style={{
+        background: 'rgba(10,10,15,0.85)',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(204,0,95,0.08)',
+      }}
+    >
+      {/* Title bar */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+        <span className="ml-2 text-white/20 text-[10px] tracking-[0.2em] font-mono">engineer.ts</span>
+      </div>
+      {/* Code body */}
+      <div className="px-4 py-4 font-mono text-[11px] leading-6 min-h-[200px]">
+        {lines.map((line, i) => (
+          <div key={i} className={CODE_LINES[i]?.color ?? 'text-white/60'}>{line}</div>
+        ))}
+        {lineIndex < CODE_LINES.length && (
+          <div className={CODE_LINES[lineIndex]?.color ?? 'text-white/60'}>
+            {currentPartial}
+            <span className="animate-pulse text-[#cc005f]">▋</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // Typewriter hook
 const useTypewriter = (words: string[], speed = 80, pause = 2000) => {
   const [displayed, setDisplayed] = React.useState('');
@@ -313,11 +394,6 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
     return () => window.removeEventListener('scroll', handleScroll);
   }, [totalSections]);
 
-  const splitTitle = (text: string) =>
-    text.split('').map((char, i) => (
-      <span key={i} className="title-char inline-block">{char === ' ' ? '\u00A0' : char}</span>
-    ));
-
   return (
     <div ref={containerRef} className="hero-container relative">
       <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }} />
@@ -329,22 +405,12 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
           <span className="block w-4 h-0.5 bg-[#cc005f]"></span>
           <span className="block w-6 h-0.5 bg-[#cc005f]"></span>
         </div>
-
       </div>
 
-      {/* Hero content â€” fixed so it stays visible while scrolling through the 3D scene */}
-      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
-        <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
-          {name.toUpperCase().split(' ').map((word, wi) => (
-            <span key={wi} className={wi === 0 ? 'text-white' : 'text-[#cc005f]'}>
-              {word.split('').map((char, i) => (
-                <span key={i} className="title-char inline-block">{char}</span>
-              ))}
-              {wi < name.split(' ').length - 1 && <span className="title-char inline-block">&nbsp;</span>}
-            </span>
-          ))}
-        </h1>
-      {/* Hero content — fixed overlay */}
+      {/* Code snippet terminal */}
+      <CodeSnippet />
+
+      {/* Hero content */}
       <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
         <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
           {name.toUpperCase().split(' ').map((word, wi) => (
@@ -357,7 +423,6 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
           ))}
         </h1>
         <div ref={subtitleRef} className="mt-6 text-center px-4" style={{ visibility: 'hidden' }}>
-          {/* Typewriter role */}
           <p className="subtitle-line text-sm md:text-base tracking-[0.3em] uppercase font-light mb-1" style={{ minHeight: '1.5em' }}>
             <span className="text-white/80">{typewriterText}</span>
             <span className="text-[#cc005f] animate-pulse">|</span>
@@ -417,7 +482,7 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
         </div>
       </div>
 
-      {/* Scroll sections â€” these create the scroll height for the 3D camera to travel through */}
+      {/* Scroll sections */}
       <div className="relative z-10" style={{ height: '300vh' }}>
         <section className="h-screen" />
         <section className="h-screen" />
@@ -426,4 +491,3 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
     </div>
   );
 };
-
