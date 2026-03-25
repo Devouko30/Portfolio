@@ -144,6 +144,39 @@ const useTypewriter = (words: string[], speed = 80, pause = 2000) => {
   return displayed;
 };
 
+// Auto-scroll caption component
+interface CaptionItem { text: string; accent: string; }
+const ScrollCaption = ({ captions }: { captions: CaptionItem[] }) => {
+  const [index, setIndex] = React.useState(0);
+  const [visible, setVisible] = React.useState(true);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIndex(i => (i + 1) % captions.length);
+        setVisible(true);
+      }, 400);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [captions.length]);
+
+  const { text, accent } = captions[index];
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        transition: 'opacity 0.4s ease, transform 0.4s ease',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(-12px)',
+      }}
+    >
+      <span className="text-white">{text.toUpperCase()} </span>
+      <span className="text-[#cc005f]">{accent.toUpperCase()}</span>
+    </span>
+  );
+};
+
 export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', subtitle = 'Building the future, one line at a time' }: HorizonHeroProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -409,15 +442,14 @@ export const Component = ({ name = 'Dev Ouko', title = 'FULL STACK DEVELOPER', s
 
       {/* Hero content */}
       <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 pointer-events-none">
-        <h1 ref={titleRef} className="font-black tracking-widest text-6xl md:text-8xl lg:text-9xl overflow-hidden" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.15em' }}>
-          {name.toUpperCase().split(' ').map((word, wi) => (
-            <span key={wi} className={wi === 0 ? 'text-white' : 'text-[#cc005f]'}>
-              {word.split('').map((char, i) => (
-                <span key={i} className="title-char inline-block">{char}</span>
-              ))}
-              {wi < name.split(' ').length - 1 && <span className="title-char inline-block">&nbsp;</span>}
-            </span>
-          ))}
+        <h1 ref={titleRef} className="font-black tracking-widest text-5xl md:text-7xl lg:text-8xl overflow-hidden text-center px-4" style={{ visibility: 'hidden', fontFamily: 'Inter, sans-serif', letterSpacing: '0.1em' }}>
+          <ScrollCaption captions={[
+            { text: 'Building Products', accent: 'That Ship.' },
+            { text: 'Turning Ideas', accent: 'Into Apps.' },
+            { text: 'Code That', accent: 'Scales.' },
+            { text: 'Web. Mobile.', accent: 'Cloud.' },
+            { text: 'Dev', accent: 'Ouko.' },
+          ]} />
         </h1>
         <div ref={subtitleRef} className="mt-6 text-center px-4" style={{ visibility: 'hidden' }}>
           <p className="subtitle-line text-sm md:text-base tracking-[0.3em] uppercase font-light mb-1" style={{ minHeight: '1.5em' }}>

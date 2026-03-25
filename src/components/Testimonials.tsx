@@ -4,25 +4,25 @@ import { LiquidButton } from '@/components/ui/liquid-glass-button';
 
 const testimonials = [
   {
-    img: 'https://randomuser.me/api/portraits/men/32.jpg',
+    img: 'https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=100&h=100&fit=crop&crop=face',
     quote: "James architected our entire e-commerce backend from scratch — clean API design, solid database schema, and delivered two weeks ahead of schedule. Rare to find that level of ownership.",
     name: 'David K.',
     role: 'CEO, RetailCo',
   },
   {
-    img: 'https://randomuser.me/api/portraits/women/44.jpg',
+    img: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop&crop=face',
     quote: "Our Android app went from wireframe to Play Store in 6 weeks. James handled everything — architecture, UI, testing, deployment. The code is clean enough that our in-house team can maintain it easily.",
     name: 'Sarah M.',
     role: 'Product Manager, TechStart',
   },
   {
-    img: 'https://randomuser.me/api/portraits/men/67.jpg',
+    img: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face',
     quote: "The API James designed handles 50k+ requests/day without breaking a sweat. Well-documented, versioned, and secured properly. He thinks like a senior engineer, not just a developer.",
     name: 'Alex R.',
     role: 'CTO, DataFlow Inc.',
   },
   {
-    img: 'https://randomuser.me/api/portraits/women/28.jpg',
+    img: 'https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?w=100&h=100&fit=crop&crop=face',
     quote: "James migrated our legacy PHP monolith to a modern microservices stack. Zero downtime, 3x performance improvement, and the team was onboarded in days. Exceptional work.",
     name: 'Amina W.',
     role: 'Founder, NovaSoft',
